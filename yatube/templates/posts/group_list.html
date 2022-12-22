@@ -1,22 +1,12 @@
-<!-- templates/posts/group_list.html --> 
 {% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
 {% block content %}
-  <!-- класс py-5 создает отступы сверху и снизу блока -->
-  <div class="container py-5">
-    {% for post in posts %}
-      <ul>
-        <li>
-          Автор: {{ post.author.get_full_name }}
-        </li>
-        <li>
-          Дата публикации: {{ post.pub_date|date:"d E Y" }}
-        </li>
-        <li>
-          Group: {{ post.group }}
-        </li>
-      </ul>
-      <p>{{ post.text }}</p>   
-    {% if not forloop.last %}<hr>{% endif %}
-  {% endfor %}
-  </div>  
+    <h1>{{ group }}</h1>
+        <p>
+          {{ group.description }}
+        </p>
+        {% for post in page_obj %}
+          {% include 'includes/one_post.html' %}
+        {% endfor %}
+    {% include 'includes/paginator.html' %}
 {% endblock %}
